@@ -155,21 +155,37 @@ function bands() {
     artist = process.argv[3];
     var args = process.argv;
     var artist = "";
+
     for (var i = 2; i < args.length; i++) {
         if (i > 2 && i < args.length) {
-            artist = artist + "_" + args[i];
+            artist = artist + "%20" + args[i];
         } else {
             artist += args[i];
         }
     }
-    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(
+    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming").then(
         function (response) {
-            console.log(response.data.VenueData);
-            console.log(response.data.EventData.datetime.moment("MM/DD/YYYY").format("MM/DD/YYYY"));
+            console.log("-------------------------");
+            console.log("Upcoming Concert Results:");
+            console.log("-------------------------");
+            console.log(response.data[0].venue.name);
+            console.log(response.data[0].venue.city);
+            console.log(response.data[0].datetime);
+            console.log("-------------------------");
+            console.log(response.data[1].venue.name);
+            console.log(response.data[1].venue.city);
+            console.log(response.data[1].datetime);
+            console.log("-------------------------");
+            console.log(response.data[2].venue.name);
+            console.log(response.data[2].venue.city);
+            console.log(response.data[2].datetime);
+            console.log("-------------------------");
+
         } // Event Data date time with Moment.js
     );
     // Then run a request with axios to the OMDB API with the movie specified
-    var qryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    var qryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming";
     // This line is just to help us debug against the actual URL.
     console.log(qryURL);
+
 }
