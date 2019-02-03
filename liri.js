@@ -6,17 +6,29 @@
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 // Grab Keys.js and store as keys var
-// require dotenv
-var keys = require("keys.js");
+var keys = require("./keys.js");
+// Require Axios
+var axios = require("axios");
+// Require dotenv
 require("dotenv").config();
+// Load the fs package to read and write
+var fs = require("fs");
+// Spotify API
+var spotify = new Spotify(keys.spotify);
+//Require spotify node
+var Spotify = require('node-spotify-api');
 
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 // Node - Spotify - API
 // Access keys information with spotify
-var spotify = new Spotify(keys.spotify);
-// var Spotify = require('node-spotify-api');
+// Commands to take in:
+// concert-this (node liri.js concert-this <artist/band name here>)
+// spotify - this - song
+// movie - this
+// do -what - it - says
+// Spotify API Calls
 songTitle = process.argv[2];
 var nodeAargs = process.argv;
 var songTitle = "";
@@ -40,7 +52,6 @@ spotify.search({
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 // Axios OMDB
-var axios = require("axios");
 movieName = process.argv[2];
 var nodeArgs = process.argv;
 var movieName = "";
@@ -65,8 +76,27 @@ var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey
 // This line is just to help us debug against the actual URL.
 console.log(queryUrl);
 // You 'll use Axios to grab data from the OMDB API and the Bands In Town API
-
-
-
-// Moment
-// DotEnv
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+// node liri.js concert-this <artist/band name here>
+// Bands in town
+artist = process.argv[2];
+var args = process.argv;
+var artist = "";
+for (var i = 2; i < args.length; i++) {
+    if (i > 2 && i < args.length) {
+        artist = artist + "_" + args[i];
+    } else {
+        artist += args[i];
+    }
+}
+axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(
+    function (response) {
+        console.log(response.data.VenueData);
+        console.log(response.data.EventData.datetime.moment("MM/DD/YYYY").format("MM/DD/YYYY"));
+    } // Event Data date time with Moment.js
+);
+// Then run a request with axios to the OMDB API with the movie specified
+var qryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+// This line is just to help us debug against the actual URL.
+console.log(qryURL);
