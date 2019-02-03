@@ -8,75 +8,114 @@
 // Grab Keys.js and store as keys var
 // var keys = require("./keys.js");
 // Require Axios
-var axios = require("axios");
+// var axios = require("axios");
+var Spotify = require('node-spotify-api');
+require('dotenv').config();
 
 
+//Spotify Testing
+// Grab Keys.js and store as keys var
+var keys = require("./keys.js");
 
+// Spotify API
+var spotify = new Spotify(keys.spotify);
+
+function spotify() {
+    songTitle = process.argv[3];
+    var nodeAargs = process.argv;
+    var songTitle = "";
+    for (var i = 2; i < nodeAargs.length; i++) {
+        if (i > 2 && i < nodeAargs.length) {
+            songTitle = songTitle + "_" + nodeAargs[i];
+        } else {
+            songTitle += nodeAargs[i];
+        }
+    }
+    spotify
+        .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+        .then(function (data) {
+            console.log(data);
+        })
+        .catch(function (err) {
+            console.error('Error occurred: ' + err);
+        });
+    // // If the song is not there, display Ace of Base "The Sign"
+    // if (songTitle === "") {
+    //     spotify.search({
+    //             type: 'track',
+    //             query: "The Sign"
+    //         })
+    //         .then(function (response) {
+    //             console.log(response);
+    //         });
+    // }
+}
+spotify();
 
 // bands in town testing
 // Bands in town
-function bands() {
-    artist = process.argv[3];
-    var args = process.argv;
-    var artist = "";
+// function bands() {
+//     artist = process.argv[3];
+//     var args = process.argv;
+//     var artist = "";
 
-    for (var i = 2; i < args.length; i++) {
-        if (i > 2 && i < args.length) {
-            artist = artist + "%20" + args[i];
-        } else {
-            artist += args[i];
-        }
-    }
-    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming").then(
-        function (response) {
-            console.log("-------------------------");
-            console.log(response.data[0].lineup);
-            console.log("-------------------------");
-            console.log(response.data[0].venue.name);
-            console.log(response.data[0].venue.city);
-            console.log(response.data[0].datetime);
-            console.log("-------------------------");
-            console.log(response.data[1].venue.name);
-            console.log(response.data[1].venue.city);
-            console.log(response.data[1].datetime);
-            console.log("-------------------------");
-            console.log(response.data[2].venue.name);
-            console.log(response.data[2].venue.city);
-            console.log(response.data[2].datetime);
-            console.log("-------------------------");
+//     for (var i = 2; i < args.length; i++) {
+//         if (i > 2 && i < args.length) {
+//             artist = artist + "%20" + args[i];
+//         } else {
+//             artist += args[i];
+//         }
+//     }
+//     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming").then(
+//         function (response) {
+//             console.log("-------------------------");
+//             console.log(response.data[0].lineup);
+//             console.log("-------------------------");
+//             console.log(response.data[0].venue.name);
+//             console.log(response.data[0].venue.city);
+//             console.log(response.data[0].datetime);
+//             console.log("-------------------------");
+//             console.log(response.data[1].venue.name);
+//             console.log(response.data[1].venue.city);
+//             console.log(response.data[1].datetime);
+//             console.log("-------------------------");
+//             console.log(response.data[2].venue.name);
+//             console.log(response.data[2].venue.city);
+//             console.log(response.data[2].datetime);
+//             console.log("-------------------------");
 
-        } // Event Data date time with Moment.js
-    );
-    // Then run a request with axios to the OMDB API with the movie specified
-    var qryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming";
-    // This line is just to help us debug against the actual URL.
-    console.log(qryURL);
+//         } // Event Data date time with Moment.js
+//     );
+//     // Then run a request with axios to the OMDB API with the movie specified
+//     var qryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming";
+//     // This line is just to help us debug against the actual URL.
+//     console.log(qryURL);
 
-    if (artist === "") {
-        axios.get("https://rest.bandsintown.com/artists/Chris%20Stapleton/events?app_id=codingbootcamp&date=upcoming").then(
-            function (response) {
-                console.log("-------------------------");
-                console.log("There was no input, so heres a suggestion!");
-                console.log(response.data[0].lineup);
-                console.log("-------------------------");
-                console.log(response.data[0].venue.name);
-                console.log(response.data[0].venue.city);
-                console.log(response.data[0].datetime);
-                console.log("-------------------------");
-                console.log(response.data[1].venue.name);
-                console.log(response.data[1].venue.city);
-                console.log(response.data[1].datetime);
-                console.log("-------------------------");
-                console.log(response.data[2].venue.name);
-                console.log(response.data[2].venue.city);
-                console.log(response.data[2].datetime);
-                console.log("-------------------------");
+//     if (artist === "") {
+//         axios.get("https://rest.bandsintown.com/artists/Chris%20Stapleton/events?app_id=codingbootcamp&date=upcoming").then(
+//             function (response) {
+//                 console.log("-------------------------");
+//                 console.log("There was no input, so heres a suggestion!");
+//                 console.log(response.data[0].lineup);
+//                 console.log("-------------------------");
+//                 console.log(response.data[0].venue.name);
+//                 console.log(response.data[0].venue.city);
+//                 console.log(response.data[0].datetime);
+//                 console.log("-------------------------");
+//                 console.log(response.data[1].venue.name);
+//                 console.log(response.data[1].venue.city);
+//                 console.log(response.data[1].datetime);
+//                 console.log("-------------------------");
+//                 console.log(response.data[2].venue.name);
+//                 console.log(response.data[2].venue.city);
+//                 console.log(response.data[2].datetime);
+//                 console.log("-------------------------");
 
-            } // Event Data date time with Moment.js
-        );
-    }
-}
-bands();
+//             } // Event Data date time with Moment.js
+//         );
+//     }
+// }
+// bands();
 // Require dotenv
 // require("dotenv").config();
 // Load the fs package to read and write
