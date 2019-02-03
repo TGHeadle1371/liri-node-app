@@ -166,7 +166,7 @@ function bands() {
     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming").then(
         function (response) {
             console.log("-------------------------");
-            console.log("Upcoming Concert Results:");
+            console.log(response.data[0].lineup);
             console.log("-------------------------");
             console.log(response.data[0].venue.name);
             console.log(response.data[0].venue.city);
@@ -188,4 +188,27 @@ function bands() {
     // This line is just to help us debug against the actual URL.
     console.log(qryURL);
 
+    if (artist === "") {
+        axios.get("https://rest.bandsintown.com/artists/Chris%20Stapleton/events?app_id=codingbootcamp&date=upcoming").then(
+            function (response) {
+                console.log("-------------------------");
+                console.log("There was no input, so heres a suggestion!");
+                console.log(response.data[0].lineup);
+                console.log("-------------------------");
+                console.log(response.data[0].venue.name);
+                console.log(response.data[0].venue.city);
+                console.log(response.data[0].datetime);
+                console.log("-------------------------");
+                console.log(response.data[1].venue.name);
+                console.log(response.data[1].venue.city);
+                console.log(response.data[1].datetime);
+                console.log("-------------------------");
+                console.log(response.data[2].venue.name);
+                console.log(response.data[2].venue.city);
+                console.log(response.data[2].datetime);
+                console.log("-------------------------");
+
+            } // Event Data date time with Moment.js
+        );
+    }
 }

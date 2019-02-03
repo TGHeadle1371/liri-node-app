@@ -57,8 +57,8 @@ function bands() {
             function (response) {
                 console.log("-------------------------");
                 console.log("There was no input, so heres a suggestion!");
+                console.log(response.data[0].lineup);
                 console.log("-------------------------");
-                console.log("Chris Stapleton");
                 console.log(response.data[0].venue.name);
                 console.log(response.data[0].venue.city);
                 console.log(response.data[0].datetime);
