@@ -9,6 +9,50 @@
 // var keys = require("./keys.js");
 // Require Axios
 var axios = require("axios");
+
+
+
+
+// bands in town testing
+// Bands in town
+function bands() {
+    artist = process.argv[3];
+    var args = process.argv;
+    var artist = "";
+
+    for (var i = 2; i < args.length; i++) {
+        if (i > 2 && i < args.length) {
+            artist = artist + "%20" + args[i];
+        } else {
+            artist += args[i];
+        }
+    }
+    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming").then(
+        function (response) {
+            console.log("-------------------------");
+            console.log("Upcoming Concert Results:");
+            console.log("-------------------------");
+            console.log(response.data[0].venue.name);
+            console.log(response.data[0].venue.city);
+            console.log(response.data[0].datetime);
+            console.log("-------------------------");
+            console.log(response.data[1].venue.name);
+            console.log(response.data[1].venue.city);
+            console.log(response.data[1].datetime);
+            console.log("-------------------------");
+            console.log(response.data[2].venue.name);
+            console.log(response.data[2].venue.city);
+            console.log(response.data[2].datetime);
+            console.log("-------------------------");
+
+        } // Event Data date time with Moment.js
+    );
+    // Then run a request with axios to the OMDB API with the movie specified
+    var qryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming";
+    // This line is just to help us debug against the actual URL.
+    console.log(qryURL);
+}
+bands();
 // Require dotenv
 // require("dotenv").config();
 // Load the fs package to read and write
@@ -29,64 +73,64 @@ var axios = require("axios");
 //         //     break;
 
 // }
+// Movie Testing
+// function movie() {
+//     // Store all of the arguments in an array
+//     var nodeArgs = process.argv;
 
-function movie() {
-    // Store all of the arguments in an array
-    var nodeArgs = process.argv;
+//     // Create an empty variable for holding the movie name
+//     var movieName = "";
 
-    // Create an empty variable for holding the movie name
-    var movieName = "";
+//     // Loop through all the words in the node argument
+//     // And do a little for-loop magic to handle the inclusion of "+"s
+//     for (var i = 2; i < nodeArgs.length; i++) {
 
-    // Loop through all the words in the node argument
-    // And do a little for-loop magic to handle the inclusion of "+"s
-    for (var i = 2; i < nodeArgs.length; i++) {
+//         if (i > 2 && i < nodeArgs.length) {
+//             movieName = movieName + "+" + nodeArgs[i];
+//         } else {
+//             movieName += nodeArgs[i];
 
-        if (i > 2 && i < nodeArgs.length) {
-            movieName = movieName + "+" + nodeArgs[i];
-        } else {
-            movieName += nodeArgs[i];
+//         }
+//     }
 
-        }
-    }
-
-    axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(
-        function (response) {
-            console.log("---------------------------");
-            console.log("Title: " + response.data.Title);
-            console.log("Release Year: " + response.data.Year);
-            console.log("Ratings:");
-            console.log(response.data.Ratings[0]);
-            console.log(response.data.Ratings[1]);
-            console.log("Country Made: " + response.data.Country);
-            console.log("Language: " + response.data.Language);
-            console.log("Plot: " + response.data.Plot);
-            console.log("Actors: " + response.data.Actors);
-            console.log("---------------------------");
-        }
-    );
-    //If no movie, display mr.nobody
-    if (movieName === "") {
-        axios.get("http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy").then(
-            function (response) {
-                console.log("We can't find something without a word, so heres a suggestion!");
-                console.log("---------------------------");
-                console.log("Title: " + response.data.Title);
-                console.log("Release Year: " + response.data.Year);
-                console.log("Ratings:");
-                console.log(response.data.Ratings[0]);
-                console.log(response.data.Ratings[1]);
-                console.log("Country Made: " + response.data.Country);
-                console.log("Language: " + response.data.Language);
-                console.log("Plot: " + response.data.Plot);
-                console.log("Actors: " + response.data.Actors);
-                console.log("---------------------------");
-                console.log('If you havent watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/ Its on Netflix!');
-            }
-        );
-        // Then run a request with axios to the OMDB API with the movie specified
-        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-        // This line is just to help us debug against the actual URL.
-        console.log(queryUrl);
-    }
-}
-movie();
+//     axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(
+//         function (response) {
+//             console.log("---------------------------");
+//             console.log("Title: " + response.data.Title);
+//             console.log("Release Year: " + response.data.Year);
+//             console.log("Ratings:");
+//             console.log(response.data.Ratings[0]);
+//             console.log(response.data.Ratings[1]);
+//             console.log("Country Made: " + response.data.Country);
+//             console.log("Language: " + response.data.Language);
+//             console.log("Plot: " + response.data.Plot);
+//             console.log("Actors: " + response.data.Actors);
+//             console.log("---------------------------");
+//         }
+//     );
+//     //If no movie, display mr.nobody
+//     if (movieName === "") {
+//         axios.get("http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy").then(
+//             function (response) {
+//                 console.log("We can't find something without a word, so heres a suggestion!");
+//                 console.log("---------------------------");
+//                 console.log("Title: " + response.data.Title);
+//                 console.log("Release Year: " + response.data.Year);
+//                 console.log("Ratings:");
+//                 console.log(response.data.Ratings[0]);
+//                 console.log(response.data.Ratings[1]);
+//                 console.log("Country Made: " + response.data.Country);
+//                 console.log("Language: " + response.data.Language);
+//                 console.log("Plot: " + response.data.Plot);
+//                 console.log("Actors: " + response.data.Actors);
+//                 console.log("---------------------------");
+//                 console.log('If you havent watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/ Its on Netflix!');
+//             }
+//         );
+//         // Then run a request with axios to the OMDB API with the movie specified
+//         var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+//         // This line is just to help us debug against the actual URL.
+//         console.log(queryUrl);
+//     }
+// }
+// movie();
