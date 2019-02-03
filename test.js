@@ -64,24 +64,29 @@ function movie() {
             console.log("---------------------------");
         }
     );
-    // //If no movie, display mr.nobody
-    // if (movieName === null) {
-    //     axios.get("http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy").then(
-    //         function (response) {
-    //             console.log(response.data.Title);
-    //             console.log(response.data.Year);
-    //             console.log(response.data.Ratings);
-    //             console.log(response.data.Country);
-    //             console.log(response.data.Language);
-    //             console.log(response.data.Plot);
-    //             console.log(response.data.Actors);
-    //             console.log('If you havent watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/ Its on Netflix!');
-    //         }
-    //     );
-    //     // Then run a request with axios to the OMDB API with the movie specified
-    //     var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-    //     // This line is just to help us debug against the actual URL.
-    //     console.log(queryUrl);
-    // }
+    //If no movie, display mr.nobody
+    if (movieName === "") {
+        axios.get("http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy").then(
+            function (response) {
+                console.log("We can't find something without a word, so heres a suggestion!");
+                console.log("---------------------------");
+                console.log("Title: " + response.data.Title);
+                console.log("Release Year: " + response.data.Year);
+                console.log("Ratings:");
+                console.log(response.data.Ratings[0]);
+                console.log(response.data.Ratings[1]);
+                console.log("Country Made: " + response.data.Country);
+                console.log("Language: " + response.data.Language);
+                console.log("Plot: " + response.data.Plot);
+                console.log("Actors: " + response.data.Actors);
+                console.log("---------------------------");
+                console.log('If you havent watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/ Its on Netflix!');
+            }
+        );
+        // Then run a request with axios to the OMDB API with the movie specified
+        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+        // This line is just to help us debug against the actual URL.
+        console.log(queryUrl);
+    }
 }
 movie();
