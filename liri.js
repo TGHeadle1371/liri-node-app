@@ -68,6 +68,16 @@ function spotify() {
         .catch(function (err) {
             console.log(err);
         });
+    // If the song is not there, display Ace of Base "The Sign"
+    if (songTitle === null) {
+        spotify.search({
+                type: 'track',
+                query: "The Sign"
+            })
+            .then(function (response) {
+                console.log(response);
+            });
+    }
 }
 
 ////////////////////////////////////////////////////////////////
@@ -97,6 +107,7 @@ function movie() {
             console.log(response.data.Actors);
         }
     );
+    //If no movie, display mr.nobody
     if (movieName === null) {
         axios.get("http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy").then(
             function (response) {
