@@ -22,6 +22,7 @@ var Spotify = require('node-spotify-api');
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 // Switch to call Liri
+var action = process.argv[2];
 switch (action) {
     case "concert-this":
         bands();
@@ -86,38 +87,54 @@ function spotify() {
 // node liri.js movie-this '<movie name here>'
 
 function movie() {
-    movieName = process.argv[3];
+    // Store all of the arguments in an array
     var nodeArgs = process.argv;
+
+    // Create an empty variable for holding the movie name
     var movieName = "";
+
+    // Loop through all the words in the node argument
+    // And do a little for-loop magic to handle the inclusion of "+"s
     for (var i = 2; i < nodeArgs.length; i++) {
+
         if (i > 2 && i < nodeArgs.length) {
-            movieName = movieName + "_" + nodeArgs[i];
+            movieName = movieName + "+" + nodeArgs[i];
         } else {
             movieName += nodeArgs[i];
+
         }
     }
+
     axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(
         function (response) {
-            console.log(response.data.Title);
-            console.log(response.data.Year);
-            console.log(response.data.Ratings);
-            console.log(response.data.Country);
-            console.log(response.data.Language);
-            console.log(response.data.Plot);
-            console.log(response.data.Actors);
+            console.log("---------------------------");
+            console.log("Title: " + response.data.Title);
+            console.log("Release Year: " + response.data.Year);
+            console.log("Ratings:");
+            console.log(response.data.Ratings[0]);
+            console.log(response.data.Ratings[1]);
+            console.log("Country Made: " + response.data.Country);
+            console.log("Language: " + response.data.Language);
+            console.log("Plot: " + response.data.Plot);
+            console.log("Actors: " + response.data.Actors);
+            console.log("---------------------------");
         }
     );
     //If no movie, display mr.nobody
     if (movieName === null) {
         axios.get("http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy").then(
             function (response) {
-                console.log(response.data.Title);
-                console.log(response.data.Year);
-                console.log(response.data.Ratings);
-                console.log(response.data.Country);
-                console.log(response.data.Language);
-                console.log(response.data.Plot);
-                console.log(response.data.Actors);
+                console.log("---------------------------");
+                console.log("Title: " + response.data.Title);
+                console.log("Release Year: " + response.data.Year);
+                console.log("Ratings:");
+                console.log(response.data.Ratings[0]);
+                console.log(response.data.Ratings[1]);
+                console.log("Country Made: " + response.data.Country);
+                console.log("Language: " + response.data.Language);
+                console.log("Plot: " + response.data.Plot);
+                console.log("Actors: " + response.data.Actors);
+                console.log("---------------------------");
                 console.log('If you havent watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/ Its on Netflix!');
             }
         );

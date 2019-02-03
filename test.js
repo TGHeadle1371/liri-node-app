@@ -18,54 +18,50 @@ var axios = require("axios");
 // Require spotify node
 // var Spotify = require('node-spotify-api');
 // Store all of the arguments in an array
-var nodeArgs = process.argv[3];
 
-// Create an empty variable for holding the movie name
-var movieName = "";
 
-// Loop through all the words in the node argument
-// And do a little for-loop magic to handle the inclusion of "+"s
-for (var i = 2; i < nodeArgs.length; i++) {
+// switch (process.argv[3]) {
+//     case "movie-this":
+//         movie();
+//         break;
+//         // case "do-what-it-says":
+//         //     do();
+//         //     break;
 
-    if (i > 2 && i < nodeArgs.length) {
-        movieName = movieName + "+" + nodeArgs[i];
-    } else {
-        movieName += nodeArgs[i];
-
-    }
-}
-switch (movieName) {
-    case "movie-this":
-        movie();
-        break;
-        // case "do-what-it-says":
-        //     do();
-        //     break;
-
-}
+// }
 
 function movie() {
-    movieName = process.argv[3];
+    // Store all of the arguments in an array
     var nodeArgs = process.argv;
+
+    // Create an empty variable for holding the movie name
     var movieName = "";
+
+    // Loop through all the words in the node argument
+    // And do a little for-loop magic to handle the inclusion of "+"s
     for (var i = 2; i < nodeArgs.length; i++) {
+
         if (i > 2 && i < nodeArgs.length) {
-            movieName = movieName + "_" + nodeArgs[i];
+            movieName = movieName + "+" + nodeArgs[i];
         } else {
             movieName += nodeArgs[i];
+
         }
     }
 
     axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(
         function (response) {
-            console.log(response.data);
-            // console.log(response.data.Title);
-            // console.log(response.data.Year);
-            // console.log(response.data.Ratings);
-            // console.log(response.data.Country);
-            // console.log(response.data.Language);
-            // console.log(response.data.Plot);
-            // console.log(response.data.Actors);
+            console.log("---------------------------");
+            console.log("Title: " + response.data.Title);
+            console.log("Release Year: " + response.data.Year);
+            console.log("Ratings:");
+            console.log(response.data.Ratings[0]);
+            console.log(response.data.Ratings[1]);
+            console.log("Country Made: " + response.data.Country);
+            console.log("Language: " + response.data.Language);
+            console.log("Plot: " + response.data.Plot);
+            console.log("Actors: " + response.data.Actors);
+            console.log("---------------------------");
         }
     );
     // //If no movie, display mr.nobody
@@ -88,3 +84,4 @@ function movie() {
     //     console.log(queryUrl);
     // }
 }
+movie();
