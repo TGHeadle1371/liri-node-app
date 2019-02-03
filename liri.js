@@ -70,7 +70,7 @@ function spotify() {
             console.log(err);
         });
     // If the song is not there, display Ace of Base "The Sign"
-    if (songTitle === null) {
+    if (songTitle === "") {
         spotify.search({
                 type: 'track',
                 query: "The Sign"
@@ -121,9 +121,10 @@ function movie() {
         }
     );
     //If no movie, display mr.nobody
-    if (movieName === null) {
+    if (movieName === "") {
         axios.get("http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy").then(
             function (response) {
+                console.log("We can't find something without a word, so heres a suggestion!");
                 console.log("---------------------------");
                 console.log("Title: " + response.data.Title);
                 console.log("Release Year: " + response.data.Year);
