@@ -5,8 +5,6 @@
 // for your assignment.
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-// Grab Keys.js and store as keys var
-// var keys = require("./keys.js");
 // Require Axios
 // var axios = require("axios");
 var Spotify = require('node-spotify-api');
@@ -19,39 +17,81 @@ var keys = require("./keys.js");
 
 // Spotify API
 var spotify = new Spotify(keys.spotify);
+var songTitle = process.argv[3];
+console.log(songTitle);
+var action = process.argv[2];
+switch (action) {
+    case "spotify-this-song":
+        spotify();
+        break;
+}
 
 function spotify() {
-    songTitle = process.argv[3];
-    var nodeAargs = process.argv;
-    var songTitle = "";
-    for (var i = 2; i < nodeAargs.length; i++) {
-        if (i > 2 && i < nodeAargs.length) {
-            songTitle = songTitle + "_" + nodeAargs[i];
-        } else {
-            songTitle += nodeAargs[i];
+    spotify.search({
+        type: 'track',
+        query: songTitle
+    }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
         }
-    }
-    spotify
-        .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-        .then(function (data) {
-            console.log(data);
-        })
-        .catch(function (err) {
-            console.error('Error occurred: ' + err);
-        });
-    // // If the song is not there, display Ace of Base "The Sign"
-    // if (songTitle === "") {
-    //     spotify.search({
-    //             type: 'track',
-    //             query: "The Sign"
-    //         })
-    //         .then(function (response) {
-    //             console.log(response);
-    //         });
-    // }
-}
-spotify();
+        // Log Artist
+        console.log(data.tracks.items[0].artists[0].name);
+        // Log Song name
+        console.log(data.tracks.items[0].name);
+        // Log URL
+        console.log(data.tracks.items[0].external_urls);
+        // Log Album Name
+        console.log(data.tracks.items[0].album.name);
 
+    });
+}
+
+//////////////////////////////////////////////////////////
+// As a Constructor
+// var axios = require("axios");
+// var Spotify = require('node-spotify-api');
+// require('dotenv').config();
+
+
+// // Spotify Testing
+// // Grab Keys.js and store as keys var
+// var keys = require("./keys.js");
+
+
+// var spotify = new Spotify(keys.spotify);
+// // Spotify API
+// var songTitle = process.argv[3];
+// console.log(songTitle);
+// var action = process.argv[2];
+// switch (action) {
+//     case "spotify-this-song":
+//         spotify();
+//         break;
+// }
+// spotify = {
+//     search: function () {
+//         type = 'track';
+//         query = songTitle;
+//     },
+//     err: function (err, data) {
+//         if (err) {
+//             return console.log('Error occurred: ' + err);
+//         }
+//         // Log Artist
+//         console.log(data.tracks.items[0].artists[0].name);
+//         // Log Song name
+//         console.log(data.tracks.items[0].name);
+//         // Log URL
+//         console.log(data.tracks.items[0].external_urls);
+//         // Log Album Name
+//         console.log(data.tracks.items[0].album.name);
+
+//     }
+// };
+
+
+
+//////////////////////////////////////////////////////////
 // bands in town testing
 // Bands in town
 // function bands() {
@@ -136,6 +176,8 @@ spotify();
 //         //     break;
 
 // }
+
+///////////////////////////////////////////////////////////////////
 // Movie Testing
 // function movie() {
 //     // Store all of the arguments in an array
