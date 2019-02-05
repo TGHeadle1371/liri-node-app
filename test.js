@@ -17,14 +17,24 @@ var keys = require("./keys.js");
 
 // Spotify API
 var spotify = new Spotify(keys.spotify);
-var songTitle = process.argv[2];
+
+songTitle = process.argv[3];
+var args = process.argv;
+var songTitle = "";
+
+for (var i = 2; i < args.length; i++) {
+    if (i > 2 && i < args.length) {
+        songTitle = songTitle + " " + args[i];
+    } else {
+        songTitle += args[i];
+    }
+}
 console.log(songTitle);
-var action = process.argv[2];
-// switch (action) {
-//     case "spotify-this-song":
-//         spotify();
-//         break;
-// }
+switch (songTitle) {
+    case "spotify-this-song":
+        spotify();
+        break;
+}
 
 // function spotify() {
 spotify.search({
