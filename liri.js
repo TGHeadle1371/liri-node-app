@@ -5,27 +5,30 @@
 // for your assignment.
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
+// Require dotenv
+require("dotenv").config();
 // Grab Keys.js and store as keys var
 var keys = require("./keys.js");
 // Require Axios
 var axios = require("axios");
-// Require dotenv
-require("dotenv").config();
+// Require spotify node
+var Spotify = require('node-spotify-api');
+// Require Momentjs
+var moment = require('moment');
 // Load the fs package to read and write
 var fs = require("fs");
 // Spotify API
 var spotify = new Spotify(keys.spotify);
 
-//Require spotify node
-var Spotify = require('node-spotify-api');
+
 
 //Grab User Input
-var title = process.argv[3];
+var command = process.argv[2];
 var nodeAargs = process.argv;
 var title = "";
 // Allow for user input to be any length
-for (var i = 2; i < nodeAargs.length; i++) {
-    if (i > 2 && i < nodeAargs.length) {
+for (var i = 3; i < nodeAargs.length; i++) {
+    if (i > 3 && i < nodeAargs.length) {
         title = title + " " + nodeAargs[i];
     } else {
         title += nodeAargs[i];
@@ -35,26 +38,38 @@ for (var i = 2; i < nodeAargs.length; i++) {
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-var command = process.argv[2];
 
-// Switch to call Liri
+//switch case
 switch (command) {
     case "concert-this":
-        bands();
+        if (title) {
+            bands(title);
+        } else {
+            console.log("Sorry can't find data");
+        }
         break;
 
     case "spotify-this-song":
-        spotify();
+        if (title) {
+            searchSpotify(title);
+        } else {
+            searchSpotify("The Sign by Ace of Base");
+        }
         break;
 
     case "movie-this":
-        movie();
+        if (title) {
+            movie(title);
+        } else {
+            movie("Mr. Nobody");
+        }
         break;
-        // case "do-what-it-says":
-        //     do();
-        //     break;
 
+    case "do-what-it-says":
+        doThing();
+        break;
 }
+
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 // node liri.js spotify-this-song '<song name here>'
@@ -63,36 +78,32 @@ switch (command) {
 // A preview link of the song from Spotify
 // The album that the song is from
 // Spotify API Calls
-spotify = function (title) {
-
+function searchSpotify(title) {
     spotify.search({
-            type: 'track',
-            query: title
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-    // If the song is not there, display Ace of Base "The Sign"
-    if (songTitle === "") {
-        spotify.search({
-                type: 'track',
-                query: "The Sign"
-            })
-            .then(function (response) {
-                console.log(response);
-            });
-    }
-};
+        type: 'track',
+        query: title
+    }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+        // Log Artist
+        console.log(data.tracks.items[0].artists[0].name);
+        // Log Song name
+        console.log(data.tracks.items[0].name);
+        // Log URL
+        console.log(data.tracks.items[0].external_urls);
+        // Log Album Name
+        console.log(data.tracks.items[0].album.name);
+
+    });
+}
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 // OMDB API Movie Call
 // node liri.js movie-this '<movie name here>'
 
-movie = function (title) {
+function movie(title) {
 
     axios.get("http://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy").then(
         function (response) {
@@ -133,14 +144,14 @@ movie = function (title) {
         // This line is just to help us debug against the actual URL.
         console.log(queryUrl);
     }
-};
+}
 
 // You 'll use Axios to grab data from the OMDB API and the Bands In Town API
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 // node liri.js concert-this <artist/band name here>
 // Bands in town
-bands = function (title) {
+function bands(title) {
 
     axios.get("https://rest.bandsintown.com/artists/" + title + "/events?app_id=codingbootcamp&date=upcoming").then(
         function (response) {
@@ -163,7 +174,7 @@ bands = function (title) {
         } // Event Data date time with Moment.js
     );
     // Then run a request with axios to the OMDB API with the movie specified
-    var qryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming";
+    var qryURL = "https://rest.bandsintown.com/artists/" + title + "/events?app_id=codingbootcamp&date=upcoming";
     // This line is just to help us debug against the actual URL.
     console.log(qryURL);
 
@@ -190,4 +201,12 @@ bands = function (title) {
             } // Event Data date time with Moment.js
         );
     }
-};
+}
+
+function doThing() {
+    fs.readFile('random.txt', "utf8", function (error, data) {
+        var txt = data.split(',');
+
+        searchSpotify(txt[1]);
+    });
+}
