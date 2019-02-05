@@ -17,35 +17,35 @@ var keys = require("./keys.js");
 
 // Spotify API
 var spotify = new Spotify(keys.spotify);
-var songTitle = process.argv[3];
+var songTitle = process.argv[2];
 console.log(songTitle);
 var action = process.argv[2];
-switch (action) {
-    case "spotify-this-song":
-        spotify();
-        break;
-}
+// switch (action) {
+//     case "spotify-this-song":
+//         spotify();
+//         break;
+// }
 
-function spotify() {
-    spotify.search({
-        type: 'track',
-        query: songTitle
-    }, function (err, data) {
-        if (err) {
-            return console.log('Error occurred: ' + err);
-        }
-        // Log Artist
-        console.log(data.tracks.items[0].artists[0].name);
-        // Log Song name
-        console.log(data.tracks.items[0].name);
-        // Log URL
-        console.log(data.tracks.items[0].external_urls);
-        // Log Album Name
-        console.log(data.tracks.items[0].album.name);
+// function spotify() {
+spotify.search({
+    type: 'track',
+    query: songTitle
+}, function (err, data) {
+    if (err) {
+        return console.log('Error occurred: ' + err);
+    }
+    // Log Artist
+    console.log(data.tracks.items[0].artists[0].name);
+    // Log Song name
+    console.log(data.tracks.items[0].name);
+    // Log URL
+    console.log(data.tracks.items[0].external_urls);
+    // Log Album Name
+    console.log(data.tracks.items[0].album.name);
 
-    });
-}
+});
 
+// }
 //////////////////////////////////////////////////////////
 // As a Constructor
 // var axios = require("axios");
