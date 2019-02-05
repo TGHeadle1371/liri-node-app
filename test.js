@@ -14,6 +14,7 @@ require('dotenv').config();
 //Spotify Testing
 // Grab Keys.js and store as keys var
 var keys = require("./keys.js");
+var moment = require('moment');
 
 // Spotify API
 var spotify = new Spotify(keys.spotify);
@@ -52,6 +53,7 @@ spotify.search({
     console.log(data.tracks.items[0].external_urls);
     // Log Album Name
     console.log(data.tracks.items[0].album.name);
+    console.log(data.tracks.items[0].album.release_date);
 
 });
 

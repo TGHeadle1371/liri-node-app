@@ -204,7 +204,7 @@ function bands(title) {
 }
 
 function doThing() {
-    fs.readFile('random.txt', "utf8", function (error, data) {
+    fs.readFile('./random.txt', "utf8", function (error, data) {
         var txt = data.split(',');
 
         searchSpotify(txt[1]);
