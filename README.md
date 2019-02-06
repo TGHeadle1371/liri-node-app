@@ -29,7 +29,7 @@ node liri.js spotify-this-song '<song name here>'
 
 ##### Shows the following information:
 
--   It will first prompt if it loads with, "This is loaded"
+-   It will first log "This is loaded",
 -   Then it will find the following:
 
 1. artist(s)
