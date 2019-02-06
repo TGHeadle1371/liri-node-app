@@ -75,7 +75,7 @@ node liri.js movie-this '<movie name here>'
 7. Plot
 8. Actors
 
-##### Example for do what it says
+##### Example for do-what-it-says
 
 ```
 node liri.js do-what-it-says
