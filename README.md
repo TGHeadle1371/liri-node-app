@@ -8,7 +8,7 @@
 -   LIRI will be a command line node app that takes in parameters and gives you back data.
 -   LIRI will do any of the below command when you enter them into the command line.
 
-*   Type:
+#### Type:
 
 ```
 node liri.js
@@ -21,16 +21,16 @@ node liri.js
 3. movie-this
 4. do-what-it-says
 
-##### Example for spotify-this-song
+#### Example for spotify-this-song
 
 ```
 node liri.js spotify-this-song '<song name here>'
 ```
 
--   shows the following information about the song in the terminal
+##### Shows the following information:
 
-*   It will first prompt if it loads with, "This is loaded"
-*   Then it will find the following:
+-   It will first prompt if it loads with, "This is loaded"
+-   Then it will find the following:
 
 1. artist(s)
 2. song name
@@ -58,7 +58,7 @@ node liri.js concert-this '<artist name here>'
 node liri.js movie-this '<movie name here>'
 ```
 
--   this would output the following information to the terminal:
+##### This would output the following information to the terminal:
 
 1. Title
 2. Release Year
