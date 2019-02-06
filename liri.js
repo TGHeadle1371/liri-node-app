@@ -12,14 +12,14 @@ var keys = require("./keys.js");
 // Require Axios
 var axios = require("axios");
 // Require spotify node
-var Spotify = require('node-spotify-api');
+var Spotify = require("node-spotify-api");
 // Require Momentjs
-var moment = require('moment');
+var moment = require("moment");
 // Load the fs package to read and write
 var fs = require("fs");
 // Spotify API
 var spotify = new Spotify(keys.spotify);
-var moment = require('moment');
+var moment = require("moment");
 now = moment();
 console.log(now.format("MM/DD/YY"));
 
@@ -35,7 +35,6 @@ for (var i = 3; i < nodeAargs.length; i++) {
         title += nodeAargs[i];
     }
 }
-
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -80,23 +79,25 @@ switch (command) {
 // The album that the song is from
 // Spotify API Calls
 function searchSpotify(title) {
-    spotify.search({
-        type: 'track',
-        query: title
-    }, function (err, data) {
-        if (err) {
-            return console.log('Error occurred: ' + err);
+    spotify.search(
+        {
+            type: "track",
+            query: title
+        },
+        function(err, data) {
+            if (err) {
+                return console.log("Error occurred: " + err);
+            }
+            // Log Artist
+            console.log(data.tracks.items[0].artists[0].name);
+            // Log Song name
+            console.log(data.tracks.items[0].name);
+            // Log URL
+            console.log(data.tracks.items[0].external_urls);
+            // Log Album Name
+            console.log(data.tracks.items[0].album.name);
         }
-        // Log Artist
-        console.log(data.tracks.items[0].artists[0].name);
-        // Log Song name
-        console.log(data.tracks.items[0].name);
-        // Log URL
-        console.log(data.tracks.items[0].external_urls);
-        // Log Album Name
-        console.log(data.tracks.items[0].album.name);
-
-    });
+    );
 }
 
 ////////////////////////////////////////////////////////////////
@@ -105,9 +106,13 @@ function searchSpotify(title) {
 // node liri.js movie-this '<movie name here>'
 
 function movie(title) {
-
-    axios.get("http://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy").then(
-        function (response) {
+    axios
+        .get(
+            "http://www.omdbapi.com/?t=" +
+                title +
+                "&y=&plot=short&apikey=trilogy"
+        )
+        .then(function(response) {
             console.log("---------------------------");
             console.log("Title: " + response.data.Title);
             console.log("Release Year: " + response.data.Year);
@@ -119,13 +124,17 @@ function movie(title) {
             console.log("Plot: " + response.data.Plot);
             console.log("Actors: " + response.data.Actors);
             console.log("---------------------------");
-        }
-    );
+        });
     //If no movie, display mr.nobody
     if (title === "") {
-        axios.get("http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy").then(
-            function (response) {
-                console.log("We can't find something without a word, so heres a suggestion!");
+        axios
+            .get(
+                "http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy"
+            )
+            .then(function(response) {
+                console.log(
+                    "We can't find something without a word, so heres a suggestion!"
+                );
                 console.log("---------------------------");
                 console.log("Title: " + response.data.Title);
                 console.log("Release Year: " + response.data.Year);
@@ -137,11 +146,15 @@ function movie(title) {
                 console.log("Plot: " + response.data.Plot);
                 console.log("Actors: " + response.data.Actors);
                 console.log("---------------------------");
-                console.log('If you havent watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/ Its on Netflix!');
-            }
-        );
+                console.log(
+                    'If you havent watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/ Its on Netflix!'
+                );
+            });
         // Then run a request with axios to the OMDB API with the movie specified
-        var queryUrl = "http://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy";
+        var queryUrl =
+            "http://www.omdbapi.com/?t=" +
+            title +
+            "&y=&plot=short&apikey=trilogy";
         // This line is just to help us debug against the actual URL.
         console.log(queryUrl);
     }
@@ -153,60 +166,82 @@ function movie(title) {
 // node liri.js concert-this <artist/band name here>
 // Bands in town
 function bands(title) {
-
-    axios.get("https://rest.bandsintown.com/artists/" + title + "/events?app_id=codingbootcamp&date=upcoming").then(
-        function (response) {
-            console.log("-------------------------");
-            console.log(response.data[0].lineup);
-            console.log("-------------------------");
-            console.log(response.data[0].venue.name);
-            console.log(response.data[0].venue.city);
-            console.log(response.data[0].datetime);
-            console.log("-------------------------");
-            console.log(response.data[1].venue.name);
-            console.log(response.data[1].venue.city);
-            console.log(response.data[1].datetime);
-            console.log("-------------------------");
-            console.log(response.data[2].venue.name);
-            console.log(response.data[2].venue.city);
-            console.log(response.data[2].datetime);
-            console.log("-------------------------");
-
-        } // Event Data date time with Moment.js
-    );
-    // Then run a request with axios to the OMDB API with the movie specified
-    var qryURL = "https://rest.bandsintown.com/artists/" + title + "/events?app_id=codingbootcamp&date=upcoming";
-    // This line is just to help us debug against the actual URL.
-    console.log(qryURL);
-
-    if (title === "") {
-        axios.get("https://rest.bandsintown.com/artists/Chris%20Stapleton/events?app_id=codingbootcamp&date=upcoming").then(
-            function (response) {
+    axios
+        .get(
+            "https://rest.bandsintown.com/artists/" +
+                title +
+                "/events?app_id=codingbootcamp&date=upcoming"
+        )
+        .then(
+            function(response) {
                 console.log("-------------------------");
-                console.log("There was no input, so heres a suggestion!");
                 console.log(response.data[0].lineup);
                 console.log("-------------------------");
                 console.log(response.data[0].venue.name);
                 console.log(response.data[0].venue.city);
-                console.log(response.data[0].datetime);
+                console.log(
+                    moment(response.data[0].datetime).format("MM/DD/YY")
+                );
                 console.log("-------------------------");
                 console.log(response.data[1].venue.name);
                 console.log(response.data[1].venue.city);
-                console.log(response.data[1].datetime);
+                console.log(
+                    moment(response.data[1].datetime).format("MM/DD/YY")
+                );
                 console.log("-------------------------");
                 console.log(response.data[2].venue.name);
                 console.log(response.data[2].venue.city);
-                console.log(response.data[2].datetime);
+                console.log(
+                    moment(response.data[2].datetime).format("MM/DD/YY")
+                );
                 console.log("-------------------------");
-
             } // Event Data date time with Moment.js
         );
+    // Then run a request with axios to the OMDB API with the movie specified
+    var qryURL =
+        "https://rest.bandsintown.com/artists/" +
+        title +
+        "/events?app_id=codingbootcamp&date=upcoming";
+    // This line is just to help us debug against the actual URL.
+    console.log(qryURL);
+
+    if (title === "") {
+        axios
+            .get(
+                "https://rest.bandsintown.com/artists/Chris%20Stapleton/events?app_id=codingbootcamp&date=upcoming"
+            )
+            .then(
+                function(response) {
+                    console.log("-------------------------");
+                    console.log("There was no input, so heres a suggestion!");
+                    console.log(response.data[0].lineup);
+                    console.log("-------------------------");
+                    console.log(response.data[0].venue.name);
+                    console.log(response.data[0].venue.city);
+                    console.log(
+                        moment(response.data[0].datetime).format("MM/DD/YY")
+                    );
+                    console.log("-------------------------");
+                    console.log(response.data[1].venue.name);
+                    console.log(response.data[1].venue.city);
+                    console.log(
+                        moment(response.data[1].datetime).format("MM/DD/YY")
+                    );
+                    console.log("-------------------------");
+                    console.log(response.data[2].venue.name);
+                    console.log(response.data[2].venue.city);
+                    console.log(
+                        moment(response.data[2].datetime).format("MM/DD/YY")
+                    );
+                    console.log("-------------------------");
+                } // Event Data date time with Moment.js
+            );
     }
 }
 
 function doThing() {
-    fs.readFile('./random.txt', "utf8", function (error, data) {
-        var txt = data.split(',');
+    fs.readFile("./random.txt", "utf8", function(error, data) {
+        var txt = data.split(",");
 
         searchSpotify(txt[1]);
     });
