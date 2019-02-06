@@ -117,7 +117,7 @@ npm install moment
 -   [Spotify npm package](https://www.npmjs.com/package/spotify)
 -   [axios](https://www.npmjs.com/package/axios)
 -   [moment](https://www.npmjs.com/package/moment)
--   [Dotenv](https://www.npmjs.com/package/dotenv)
+-   [dotenv](https://www.npmjs.com/package/dotenv)
 
 ## Copyright
 
