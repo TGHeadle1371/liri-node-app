@@ -79,12 +79,11 @@ switch (command) {
 // The album that the song is from
 // Spotify API Calls
 function searchSpotify(title) {
-    spotify.search(
-        {
+    spotify.search({
             type: "track",
             query: title
         },
-        function(err, data) {
+        function (err, data) {
             if (err) {
                 return console.log("Error occurred: " + err);
             }
@@ -109,10 +108,10 @@ function movie(title) {
     axios
         .get(
             "http://www.omdbapi.com/?t=" +
-                title +
-                "&y=&plot=short&apikey=trilogy"
+            title +
+            "&y=&plot=short&apikey=trilogy"
         )
-        .then(function(response) {
+        .then(function (response) {
             console.log("---------------------------");
             console.log("Title: " + response.data.Title);
             console.log("Release Year: " + response.data.Year);
@@ -131,7 +130,7 @@ function movie(title) {
             .get(
                 "http://www.omdbapi.com/?t=Mr+nobody&y=&plot=short&apikey=trilogy"
             )
-            .then(function(response) {
+            .then(function (response) {
                 console.log(
                     "We can't find something without a word, so heres a suggestion!"
                 );
@@ -169,34 +168,28 @@ function bands(title) {
     axios
         .get(
             "https://rest.bandsintown.com/artists/" +
-                title +
-                "/events?app_id=codingbootcamp&date=upcoming"
+            title +
+            "/events?app_id=codingbootcamp&date=upcoming"
         )
-        .then(
-            function(response) {
-                console.log("-------------------------");
-                console.log(response.data[0].lineup);
-                console.log("-------------------------");
-                console.log(response.data[0].venue.name);
-                console.log(response.data[0].venue.city);
-                console.log(
-                    moment(response.data[0].datetime).format("MM/DD/YY")
-                );
-                console.log("-------------------------");
-                console.log(response.data[1].venue.name);
-                console.log(response.data[1].venue.city);
-                console.log(
-                    moment(response.data[1].datetime).format("MM/DD/YY")
-                );
-                console.log("-------------------------");
-                console.log(response.data[2].venue.name);
-                console.log(response.data[2].venue.city);
-                console.log(
-                    moment(response.data[2].datetime).format("MM/DD/YY")
-                );
-                console.log("-------------------------");
-            } // Event Data date time with Moment.js
-        );
+        // Event Data Lineup, Venue Name, City, and Date with Moment.js
+        .then(function (response) {
+            console.log("-------------------------");
+            console.log(response.data[0].lineup);
+            console.log("-------------------------");
+            console.log("Venue Name: " + response.data[0].venue.name);
+            console.log("Venue City: " + response.data[0].venue.city);
+            console.log("Concert Date: " + moment(response.data[0].datetime).format("MM/DD/YY"));
+            console.log("-------------------------");
+            console.log("Venue Name: " + response.data[1].venue.name);
+            console.log("Venue City: " + response.data[1].venue.city);
+            console.log("Concert Date: " + moment(response.data[1].datetime).format("MM/DD/YY"));
+            console.log("-------------------------");
+            console.log("Venue Name: " + response.data[2].venue.name);
+            console.log("Venue City: " + response.data[2].venue.city);
+            console.log("Concert Date: " + moment(response.data[2].datetime).format("MM/DD/YY"));
+            console.log("-------------------------");
+
+        });
     // Then run a request with axios to the OMDB API with the movie specified
     var qryURL =
         "https://rest.bandsintown.com/artists/" +
@@ -211,27 +204,27 @@ function bands(title) {
                 "https://rest.bandsintown.com/artists/Chris%20Stapleton/events?app_id=codingbootcamp&date=upcoming"
             )
             .then(
-                function(response) {
+                function (response) {
                     console.log("-------------------------");
                     console.log("There was no input, so heres a suggestion!");
                     console.log(response.data[0].lineup);
                     console.log("-------------------------");
-                    console.log(response.data[0].venue.name);
-                    console.log(response.data[0].venue.city);
+                    console.log("Venue Name: " + response.data[0].venue.name);
+                    console.log("Venue City: " + response.data[0].venue.city);
                     console.log(
-                        moment(response.data[0].datetime).format("MM/DD/YY")
+                        "Concert Date: " + moment(response.data[0].datetime).format("MM/DD/YY")
                     );
                     console.log("-------------------------");
-                    console.log(response.data[1].venue.name);
-                    console.log(response.data[1].venue.city);
+                    console.log("Venue Name: " + response.data[1].venue.name);
+                    console.log("Venue City: " + response.data[1].venue.city);
                     console.log(
-                        moment(response.data[1].datetime).format("MM/DD/YY")
+                        "Concert Date: " + moment(esponse.data[1].datetime).format("MM/DD/YY")
                     );
                     console.log("-------------------------");
-                    console.log(response.data[2].venue.name);
-                    console.log(response.data[2].venue.city);
+                    console.log("Venue Name: " + response.data[2].venue.name);
+                    console.log("Venue City: " + response.data[2].venue.city);
                     console.log(
-                        moment(response.data[2].datetime).format("MM/DD/YY")
+                        "Concert Date: " + moment(response.data[2].datetime).format("MM/DD/YY")
                     );
                     console.log("-------------------------");
                 } // Event Data date time with Moment.js
@@ -240,7 +233,7 @@ function bands(title) {
 }
 
 function doThing() {
-    fs.readFile("./random.txt", "utf8", function(error, data) {
+    fs.readFile("./random.txt", "utf8", function (error, data) {
         var txt = data.split(",");
 
         searchSpotify(txt[1]);
