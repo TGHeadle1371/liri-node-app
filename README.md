@@ -87,7 +87,10 @@ node liri.js do-what-it-says
 
 ```
 npm install spotify
-npm install request
+npm install axios
+npm install dotenv
+npm install moment
+
 ``` -->
 
 # Copyright

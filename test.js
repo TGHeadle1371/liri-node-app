@@ -7,55 +7,55 @@
 ////////////////////////////////////////////////////////////////
 // Require Axios
 // var axios = require("axios");
-var Spotify = require('node-spotify-api');
-require('dotenv').config();
+// var Spotify = require('node-spotify-api');
+// require('dotenv').config();
 
 
-//Spotify Testing
-// Grab Keys.js and store as keys var
-var keys = require("./keys.js");
-var moment = require('moment');
+// //Spotify Testing
+// // Grab Keys.js and store as keys var
+// var keys = require("./keys.js");
+// var moment = require('moment');
 
-// Spotify API
-var spotify = new Spotify(keys.spotify);
+// // Spotify API
+// var spotify = new Spotify(keys.spotify);
 
-songTitle = process.argv[3];
-var args = process.argv;
-var songTitle = "";
+// songTitle = process.argv[3];
+// var args = process.argv;
+// var songTitle = "";
 
-for (var i = 2; i < args.length; i++) {
-    if (i > 2 && i < args.length) {
-        songTitle = songTitle + " " + args[i];
-    } else {
-        songTitle += args[i];
-    }
-}
-console.log(songTitle);
-switch (songTitle) {
-    case "spotify-this-song":
-        spotify();
-        break;
-}
+// for (var i = 2; i < args.length; i++) {
+//     if (i > 2 && i < args.length) {
+//         songTitle = songTitle + " " + args[i];
+//     } else {
+//         songTitle += args[i];
+//     }
+// }
+// console.log(songTitle);
+// switch (songTitle) {
+//     case "spotify-this-song":
+//         spotify();
+//         break;
+// }
 
-// function spotify() {
-spotify.search({
-    type: 'track',
-    query: songTitle
-}, function (err, data) {
-    if (err) {
-        return console.log('Error occurred: ' + err);
-    }
-    // Log Artist
-    console.log(data.tracks.items[0].artists[0].name);
-    // Log Song name
-    console.log(data.tracks.items[0].name);
-    // Log URL
-    console.log(data.tracks.items[0].external_urls);
-    // Log Album Name
-    console.log(data.tracks.items[0].album.name);
-    console.log(data.tracks.items[0].album.release_date);
+// // function spotify() {
+// spotify.search({
+//     type: 'track',
+//     query: songTitle
+// }, function (err, data) {
+//     if (err) {
+//         return console.log('Error occurred: ' + err);
+//     }
+//     // Log Artist
+//     console.log(data.tracks.items[0].artists[0].name);
+//     // Log Song name
+//     console.log(data.tracks.items[0].name);
+//     // Log URL
+//     console.log(data.tracks.items[0].external_urls);
+//     // Log Album Name
+//     console.log(data.tracks.items[0].album.name);
+//     console.log(data.tracks.items[0].album.release_date);
 
-});
+// });
 
 // }
 //////////////////////////////////////////////////////////

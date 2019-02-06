@@ -19,8 +19,9 @@ var moment = require('moment');
 var fs = require("fs");
 // Spotify API
 var spotify = new Spotify(keys.spotify);
-
-
+var moment = require('moment');
+moment.utc().format('MM/DD/YY');
+console.log(moment);
 
 //Grab User Input
 var command = process.argv[2];
