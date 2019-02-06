@@ -1,10 +1,11 @@
 ## LIRI Node App
 
+### LIRI: Language Interpretation and Recognition Interface.
+
 ### Introduction
 
 -   Node.js app called LIRI that is similiar to SIRI for the iPhone
 -   Must be ran in a command line
--   LIRI: Language Interpretation and Recognition Interface.
 -   LIRI will be a command line node app that takes in parameters and gives you back data.
 -   LIRI will do any of the below command when you enter them into the command line.
 
