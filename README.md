@@ -29,7 +29,7 @@ node liri.js spotify-this-song '<song name here>'
 
 ![Spotify Image](/images/spotify-this-song.png)
 
-##### Shows the following information:
+#### Shows the following information:
 
 -   It will first log "This is loaded",
 -   Then it will find the following:
@@ -39,7 +39,7 @@ node liri.js spotify-this-song '<song name here>'
 3. preview link of the song from spotify
 4. album that the song is a part of
 
-##### Example for concert-this
+#### Example for concert-this
 
 ```
 node liri.js concert-this '<artist name here>'
@@ -56,7 +56,7 @@ node liri.js concert-this '<artist name here>'
 3. What City the Venue is in
 4. Date and Time of the concert
 
-##### Example for movie-this
+#### Example for movie-this
 
 ```
 node liri.js movie-this '<movie name here>'
@@ -75,7 +75,7 @@ node liri.js movie-this '<movie name here>'
 7. Plot
 8. Actors
 
-##### Example for do-what-it-says
+#### Example for do-what-it-says
 
 ```
 node liri.js do-what-it-says
@@ -101,6 +101,6 @@ npm install moment
 
 ``` -->
 
-# Copyright
+## Copyright
 
 Thomas Headle &copy; 2019. All Rights Reserved.
