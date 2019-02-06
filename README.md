@@ -8,18 +8,18 @@
 -   LIRI will be a command line node app that takes in parameters and gives you back data.
 -   LIRI will do any of the below command when you enter them into the command line.
 
-1. spotify-this-song
-2. concert-this
-3. movie-this
-4. do-what-it-says
-
--   Type:
+*   Type:
 
 ```
 node liri.js
 ```
 
--   with the correct command proceeding, followed by a search input of your choice
+###### Followed by:
+
+1. spotify-this-song
+2. concert-this
+3. movie-this
+4. do-what-it-says
 
 ##### Example for spotify-this-song
 
