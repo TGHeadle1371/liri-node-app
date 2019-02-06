@@ -27,6 +27,8 @@ node liri.js
 node liri.js spotify-this-song '<song name here>'
 ```
 
+![Spotify Image](/images/spotify-this-song.png)
+
 ##### Shows the following information:
 
 -   It will first log "This is loaded",
@@ -43,6 +45,8 @@ node liri.js spotify-this-song '<song name here>'
 node liri.js concert-this '<artist name here>'
 ```
 
+![Spotify Image](/images/concert-this.png)
+
 -   To find concerts with LIRI, we use concert-this
 -   Simple type an artist following the words 'concert-this'
 -   and the following information will be displayed:
@@ -57,6 +61,8 @@ node liri.js concert-this '<artist name here>'
 ```
 node liri.js movie-this '<movie name here>'
 ```
+
+![Spotify Image](/images/movie-this.png)
 
 ##### This would output the following information to the terminal:
 
@@ -74,6 +80,8 @@ node liri.js movie-this '<movie name here>'
 ```
 node liri.js do-what-it-says
 ```
+
+![Spotify Image](/images/do-what-says.png)
 
 -   This command grabs information from a .txt file and reads it
 
