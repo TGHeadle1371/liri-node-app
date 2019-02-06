@@ -85,11 +85,12 @@ node liri.js do-what-it-says
 
 -   This command grabs information from a .txt file and reads it
 
-<!-- *   These are the npm packages I used and are needed to run the app
+*   NPM Packages used
 
-1. fs package in node
-2. [spotify](https://www.npmjs.com/package/spotify)
-3. [request](https://www.npmjs.com/package/request)
+1. [spotify](https://www.npmjs.com/package/spotify)
+2. [axios](https://www.npmjs.com/package/axios)
+3. [moment](https://www.npmjs.com/package/moment)
+4. [Dotenv](https://www.npmjs.com/package/dotenv)
 
 -   to install these npm packages run these commands one at a time.
 
@@ -99,7 +100,23 @@ npm install axios
 npm install dotenv
 npm install moment
 
-``` -->
+```
+
+##### Technologies
+
+-   HTML
+-   CSS
+-   JavaScript
+-   Node.js
+-   Moment.js
+-   fs read/write
+-   [Bands In Town API](https://app.swaggerhub.com/apis/Bandsintown/PublicAPI/3.0.0)
+-   [OMDB API](http://www.omdbapi.com/)
+-   [Spotify API](https://developer.spotify.com/documentation/web-api/)
+-   [Spotify npm package](https://www.npmjs.com/package/spotify)
+-   [axios](https://www.npmjs.com/package/axios)
+-   [moment](https://www.npmjs.com/package/moment)
+-   [Dotenv](https://www.npmjs.com/package/dotenv)
 
 ## Copyright
 
