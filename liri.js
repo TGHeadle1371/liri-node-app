@@ -19,9 +19,11 @@ var moment = require("moment");
 var fs = require("fs");
 // Spotify API
 var spotify = new Spotify(keys.spotify);
+// Require moment.js
 var moment = require("moment");
-now = moment();
-console.log(now.format("MM/DD/YY"));
+//Test for moment
+// now = moment();
+// console.log(now.format("MM/DD/YY"));
 
 //Grab User Input
 var command = process.argv[2];
@@ -41,6 +43,7 @@ for (var i = 3; i < nodeAargs.length; i++) {
 
 //switch case
 switch (command) {
+    //Concert-this
     case "concert-this":
         if (title) {
             bands(title);
@@ -48,7 +51,7 @@ switch (command) {
             console.log("Sorry can't find data");
         }
         break;
-
+        //Spotify-this-song
     case "spotify-this-song":
         if (title) {
             searchSpotify(title);
@@ -56,7 +59,7 @@ switch (command) {
             searchSpotify("The Sign by Ace of Base");
         }
         break;
-
+        // movie-this
     case "movie-this":
         if (title) {
             movie(title);
@@ -64,7 +67,7 @@ switch (command) {
             movie("Mr. Nobody");
         }
         break;
-
+        // do-what-it-says
     case "do-what-it-says":
         doThing();
         break;
@@ -77,7 +80,7 @@ switch (command) {
 // The song 's name
 // A preview link of the song from Spotify
 // The album that the song is from
-// Spotify API Calls
+// Spotify API Call Function
 function searchSpotify(title) {
     spotify.search({
             type: "track",
@@ -113,18 +116,25 @@ function movie(title) {
         )
         .then(function (response) {
             console.log("---------------------------");
+            // Log Title
             console.log("Title: " + response.data.Title);
+            // Log Release Year
             console.log("Release Year: " + response.data.Year);
+            // Log IMDB and Rotten tomato ratings
             console.log("Ratings:");
             console.log(response.data.Ratings[0]);
             console.log(response.data.Ratings[1]);
+            // Log Country it was made in
             console.log("Country Made: " + response.data.Country);
+            // Log the language
             console.log("Language: " + response.data.Language);
+            // Log the plot
             console.log("Plot: " + response.data.Plot);
+            // Log all actors
             console.log("Actors: " + response.data.Actors);
             console.log("---------------------------");
         });
-    //If no movie, display mr.nobody
+    //If no movie, display Mr.Nobody with same stats
     if (title === "") {
         axios
             .get(
@@ -159,11 +169,10 @@ function movie(title) {
     }
 }
 
-// You 'll use Axios to grab data from the OMDB API and the Bands In Town API
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 // node liri.js concert-this <artist/band name here>
-// Bands in town
+// Bands in town API call
 function bands(title) {
     axios
         .get(
@@ -197,7 +206,7 @@ function bands(title) {
         "/events?app_id=codingbootcamp&date=upcoming";
     // This line is just to help us debug against the actual URL.
     console.log(qryURL);
-
+    // If title is blank, grab suggestion
     if (title === "") {
         axios
             .get(
@@ -231,11 +240,11 @@ function bands(title) {
             );
     }
 }
-
+// Do-what-it-says function
 function doThing() {
     fs.readFile("./random.txt", "utf8", function (error, data) {
         var txt = data.split(",");
-
+        // Search spotify with the text inside of Random.txt 
         searchSpotify(txt[1]);
     });
 }
