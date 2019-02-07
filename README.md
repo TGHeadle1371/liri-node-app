@@ -11,6 +11,8 @@
 
 #### Type:
 
+###### For a list of commands
+
 ```
 node liri.js
 ```
